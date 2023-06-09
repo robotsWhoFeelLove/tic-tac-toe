@@ -6,8 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic Tac Toe</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Francois+One&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="header">
+        Tic-Tac-Toe
+    </div>
+    <div class="display" >
+        <div>New Game</div>
+        <label for="">Player One Name</label>
+        <input id="player-one" type="text">
+        <label for="">Player Two Name</label>
+        <input id="player-two" type="text">
+        <button id="play">Play Game</button>
+    </div>
+    <div class="main">
+        <div class="console board-container">
+            <div class="space" id="index1"></div>
+            <div class="space" id="index2"></div>
+            <div class="space" id="index3"></div>
+            <div class="space" id="index4"></div>
+            <div class="space" id="index5"></div>
+            <div class="space" id="index6"></div>
+            <div class="space" id="index7"></div>
+            <div class="space" id="index8"></div>
+            <div class="space" id="index9"></div>
+        </div>
+    <button id="reset">Reset</button>
+    </div>
+
+
     
     <script src="index.js"></script>
 </body>

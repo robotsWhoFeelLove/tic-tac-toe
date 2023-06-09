@@ -19,19 +19,6 @@ const gameBoard = (() => {console.log("gameBoard ran")
         const playerMove=(moveRow,moveColumn,marker)=> {
             board[moveRow-1].columns.splice(moveColumn-1,1,marker);
 
-
-
-
-
-        // if(board[((moveRow-1)*3)+moveColumn-1] == null){console.log("Valid Move")
-        //     board.splice((((moveRow-1)*3)+(moveColumn-1)),1,marker.toUpperCase());
-        //     console.log("board position is "+ ((moveRow-1)*3)+(moveColumn-1));
-        // } else {
-        //     console.log("Position is taken.")
-        // }
-        // const playerMove = _playerMove()
-        // console.log(board);
-        
         }
 
         return {
@@ -41,17 +28,6 @@ const gameBoard = (() => {console.log("gameBoard ran")
     })()
 
 
-// const checkWin = (gameBoard.board.forEach((spot,i) => {
-//     spot.columns.forEach((column,j) => {
-//        let boardPositions = [];
-
-//         boardPositions.push(`r${i+1}c${j+1}|${column}`);
-//         console.log(boardPositions);
-//         return {boardPositions}
-//          })
-
-// })
-//  )
 let checkWin = (()=>{
 let r1C1 = gameBoard.board[0].columns[0];
 let r1C2 = gameBoard.board[0].columns[1];
@@ -74,9 +50,10 @@ if(r1C1 == "X" && r1C2 == "X" && r1C3 == "X" ||
     r1C2 == "X" && r2C2 == "X" && r3C2 == "X" ||
     r1C2 == "O" && r2C2 == "O" && r2C2 == "O" ||
     r1C3 == "X" && r2C3 == "X" && r3C3 == "X" ||
-    r1C3 == "O" && r2C3 == "O" && r2C3 == "O" ||
+    r1C3 == "O" && r2C3 == "O" && r3C3 == "O" ||
     r1C1 == "X" && r2C2 == "X" && r3C3 == "X" ||
-    r3C1 == "O" && r2C2 == "O" && r1C3 == "O"
+    r3C1 == "O" && r2C2 == "O" && r1C3 == "O" ||
+    r3C1 == "X" && r2C2 == "X" && r1C3 == "X"
     ){
 return true;
 }
@@ -85,6 +62,7 @@ return true;
 
 
 const gameController = ((playerOneName="Player One", playerTwoName="Player Two")=>{
+    let position;
     const players = [
         {
             name: playerOneName,
@@ -97,76 +75,134 @@ const gameController = ((playerOneName="Player One", playerTwoName="Player Two")
     ]
     console.log(players);
 
-    // let i=0
+
     let isResult = false;
     let player;
-    while (!isResult){
+    let i = 0
+    // while (!isResult){
      
-        // alert(players[i].name)
-
-     const playRound = (() => {console.log("playRound ran");
-        for(i =0; i < 2 ; i++){
-
-        if(isResult){
+    const showText = function(text){
+        let display = document.querySelector(".display");
+        display.innerHTML=""
+        let displayText = document.createElement("div");
+        displayText.textContent = text
+        display.appendChild(displayText);
+        display.classList.toggle("hidden");
+        setTimeout(()=>{display.classList.toggle("hidden")},
+        1500)
         
-            break
-        }
+    }
 
- 
+    function playRound() {
+        console.log("playRound ran");
+
+        // document.querySelector(".display").classList.toggle("hidden");   
+        // if(isResult){
         player = players[i];
-        let row;
-        let column;
-        row = prompt(`${player.name}, select row`);
-        console.log({row});
-        column = prompt(`${player.name}, select column`);
-        console.log({column});
-        let checkBoard = (()=> { console.log("ran Checkboard");
-            if(gameBoard.board[row-1].columns[column-1]){
-                row= prompt("Move is taken, please select another row");
-                column= prompt("Please select another column");
 
-            }})();
-        checkBoard;
-        gameBoard.playerMove(row,column,player.marker)
-            console.log (`${player.name} places ${player.marker} on row ${row} and column ${column}`);
+        showText(`${player.marker}!!!! It's your move, ${player.name}`)
+            
 
+        // let display = document.querySelector(".display");
+        // display.innerHTML=""
+        // let displayText = document.createElement("div");
+        // displayText.textContent = `${player.marker}!!!! It's your move, ${player.name}`
+        // display.appendChild(displayText);
+        // display.classList.toggle("hidden");
+        // setTimeout(()=>{display.classList.toggle("hidden")},
+        // 2000)
+        // return{
+        //     players,
+        //     playerOneName,
+        //     playerTwoName,
+        //     playRound,
+        //     i
+        // }   
+    }
+    playRound()
+
+document.body.addEventListener("click", (e)=>{console.log(e.target);
+    if(e.target.className.substring(0,5)==="space"){
+                // let selectedSpace = document.e.target.classList
+                if(e.target.textContent != "X" || e.target.textContent != "O"){
+                e.target.textContent = player.marker;
+                let position = e.target.id.substring(5);
+                console.log({position})
+                e.target.classList.add(`${player.marker.toLowerCase()}-space`);
+                playerClick(position)
+            } else {
+                showText ("That space is already taken!")
+            }}});
+        
+            
+ let playerClick =  function(position){console.log({position});
+
+            console.log({position});
+            let rowNum= Math.floor((position-1)/3)+1;
+            console.log({rowNum});
+            let columnNum = position - ((rowNum - 1) *3);
+            console.log({columnNum});
+        // row = prompt(`${player.name}, select row`);
+        // console.log({row});
+        // column = prompt(`${player.name}, select column`);
+        // console.log({column});
+
+            // if(gameBoard.board[rowNum-1].columns[columnNum-1]){
+            //     console.log("Move is taken, please select another row");
+            //     console.log("Please select another column");
+            // } else {
+                gameBoard.playerMove(rowNum,columnNum,player.marker);
+                console.log (`${player.name} places ${player.marker} on row ${rowNum} and column ${columnNum}`); 
+              
+            // }
+        
+      
+        
+  
         let getBoard = console.table(gameBoard.board[0].columns+ "\n" +gameBoard.board[1].columns+" \n" +gameBoard.board[2].columns);
-        // i < 2? i = ++i:
-        // i = 0;
+
         if(checkWin()){
                 isResult = true;
-                console.log(`${player.name} wins!!`);
+                showText(`${player.name} wins!!`);
             }
-            // checkWin();
-            // return{
-            //     player
-            // }
+
+        i===1? i= i-1 :
+            i=i+1;
+            console.log({i})
+        
+        if(!isResult){
+            playRound();
         }
-                
-        })()}
-
-
-    return{
-        players,
-        playerOneName,
-        playerTwoName,
-    }    
-})();
+        document.body.removeEventListener("click",playerClick())
+        // playRound
+        }
+})   
 
 
 
+// if (!isResult){
+//     playRound()}
+// })
+// ();
+document.querySelector("#play").addEventListener("click",()=>{
+    let playerOne = document.querySelector("#player-one").value == ""? "Player One":
+    document.querySelector("#player-one").value ;
+    let playerTwo = document.querySelector("#player-two").value == ""? "Player Two":
+    document.querySelector("#player-two").value ;
+        gameController(playerOne,playerTwo);
+
+    document.querySelector(".display").classList.toggle("hidden");
+}
+);
+
+document.querySelector("#reset").addEventListener("click",function(){
+   location.reload()}
+)
 
 
 
 
 
-// const Ian= player('Ian', "X");
-// const Sarah = player('Sarah',"O");
-// const Bad = player('bad',"X");
-// // console.log(players);
 
-// // const playerMove = playerMove();
-// Ian.move(1,2);
-// Sarah.move(2,2);
-// Ian.move(1,3);
-// Sarah.move(3,1);
+
+

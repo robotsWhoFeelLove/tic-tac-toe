@@ -1,0 +1,97 @@
+*{
+    box-sizing: border-box;
+    font-family: 'Francois One', sans-serif;
+    font-size: clamp(1rem,3vw,2rem);
+}
+body{
+    background: linear-gradient(45deg, #e66465, rgb(2, 2, 141,.7));
+}
+.display{
+    position: absolute;
+    height: 70vh;
+    width: 70vw;
+    margin-left: 15vw;
+    margin-top: 15vh;
+    background-color: whitesmoke;
+    border: 2px solid #4681f4;
+    border-radius: 3px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5vh;
+    align-items: center;
+    text-align: center;
+}
+input{
+    width: min(50vw,250px);
+    border: 1px solid #4681f4;
+    border-radius: 3px;
+    height: 1.6rem;
+}
+.hidden{
+    display: none;
+}
+.board-container{
+    margin-left: min(5vw,5vh);
+    margin-top: min(7.5vw,7.5vh);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    border: 2px solid black;
+    width: min(90vw,90vh);
+    height: min(90vw,90vh);
+    background-color: black;
+    gap: 1vw;
+}
+.space{
+ background-color: whitesmoke;
+ display: grid;
+ justify-content: center;
+ align-items: center;
+}
+
+.main{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    gap: max(10vh,10vw);
+}
+
+.x-space{
+    font-size: 2.5rem;
+    font-family: 'Times New Roman', Times, serif;
+    background-color: rgba(196, 2, 2, 0.875);
+    color: rgb(228, 228, 228);
+}
+.o-space{
+    font-size: 2.5rem;
+    font-family: 'Times New Roman', Times, serif;
+    background-color: rgb(2, 2, 141);
+    color: rgb(228, 228, 228);
+}
+button{
+    background-color: #4681f4;
+    height: 10vh;
+    width: 20vh;
+    border-radius: 20px;
+    color: white;
+    border: 0;
+    
+}
+.header{
+    font-family: 'Francois One', sans-serif;
+    font-size: clamp(1.5rem,5vw,2.5rem);
+    text-align: center;
+    color: white;
+}
+
+/* .x-space:hover,
+.O-space:hover{ */
+.space:hover{
+    background: linear-gradient(45deg, rgb(196, 2, 2, 0.875),#4681f4);
+}
+/* .space:hover{
+    background: yellow;
+} */
