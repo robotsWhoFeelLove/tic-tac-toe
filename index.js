@@ -79,9 +79,10 @@ const gameController = ((playerOneName="Player One", playerTwoName="Player Two")
     let isResult = false;
     let player;
     let i = 0
-    // while (!isResult){
+
      
     const showText = function(text){
+        setTimeout(()=>{
         let display = document.querySelector(".display");
         display.innerHTML=""
         let displayText = document.createElement("div");
@@ -89,50 +90,34 @@ const gameController = ((playerOneName="Player One", playerTwoName="Player Two")
         display.appendChild(displayText);
         display.classList.toggle("hidden");
         setTimeout(()=>{display.classList.toggle("hidden")},
-        1500)
+        1100)},300)
         
     }
 
     function playRound() {
         console.log("playRound ran");
 
-        // document.querySelector(".display").classList.toggle("hidden");   
-        // if(isResult){
         player = players[i];
 
         showText(`${player.marker}!!!! It's your move, ${player.name}`)
             
 
-        // let display = document.querySelector(".display");
-        // display.innerHTML=""
-        // let displayText = document.createElement("div");
-        // displayText.textContent = `${player.marker}!!!! It's your move, ${player.name}`
-        // display.appendChild(displayText);
-        // display.classList.toggle("hidden");
-        // setTimeout(()=>{display.classList.toggle("hidden")},
-        // 2000)
-        // return{
-        //     players,
-        //     playerOneName,
-        //     playerTwoName,
-        //     playRound,
-        //     i
-        // }   
+
     }
     playRound()
 
 document.body.addEventListener("click", (e)=>{console.log(e.target);
     if(e.target.className.substring(0,5)==="space"){
-                // let selectedSpace = document.e.target.classList
+
                 if(e.target.textContent != "X" || e.target.textContent != "O"){
-                e.target.textContent = player.marker;
+                e.target.textContent = player.marker;}
                 let position = e.target.id.substring(5);
                 console.log({position})
                 e.target.classList.add(`${player.marker.toLowerCase()}-space`);
                 playerClick(position)
             } else {
                 showText ("That space is already taken!")
-            }}});
+            }});
         
             
  let playerClick =  function(position){console.log({position});
@@ -142,21 +127,9 @@ document.body.addEventListener("click", (e)=>{console.log(e.target);
             console.log({rowNum});
             let columnNum = position - ((rowNum - 1) *3);
             console.log({columnNum});
-        // row = prompt(`${player.name}, select row`);
-        // console.log({row});
-        // column = prompt(`${player.name}, select column`);
-        // console.log({column});
 
-            // if(gameBoard.board[rowNum-1].columns[columnNum-1]){
-            //     console.log("Move is taken, please select another row");
-            //     console.log("Please select another column");
-            // } else {
                 gameBoard.playerMove(rowNum,columnNum,player.marker);
                 console.log (`${player.name} places ${player.marker} on row ${rowNum} and column ${columnNum}`); 
-              
-            // }
-        
-      
         
   
         let getBoard = console.table(gameBoard.board[0].columns+ "\n" +gameBoard.board[1].columns+" \n" +gameBoard.board[2].columns);
@@ -174,16 +147,9 @@ document.body.addEventListener("click", (e)=>{console.log(e.target);
             playRound();
         }
         document.body.removeEventListener("click",playerClick())
-        // playRound
         }
 })   
 
-
-
-// if (!isResult){
-//     playRound()}
-// })
-// ();
 document.querySelector("#play").addEventListener("click",()=>{
     let playerOne = document.querySelector("#player-one").value == ""? "Player One":
     document.querySelector("#player-one").value ;
